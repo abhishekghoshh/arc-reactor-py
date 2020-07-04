@@ -67,8 +67,14 @@ def checkImportLine(line):
 
 def addToImportSet(import_set,import_line):
     try:
-        word_list=import_line.strip().split(" ")[1]
-        import_set.add(word_list.split(".")[0])
+        import_line_split = import_line.strip().split(" ")
+        if "from" == import_line_split[0]:
+            word_list=import_line_split[1]
+            import_set.add(word_list.split(".")[0])
+        if "import" == import_line_split[0]:
+            word_list_split=import_line_split[1].split(",")
+            for word_list in word_list_split:
+                import_set.add(word_list.split(".")[0])
     except Exception as ex:
         return ex
 

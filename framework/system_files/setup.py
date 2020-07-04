@@ -1,4 +1,4 @@
-from installer import installPip
+from installer import installPip,IfInstalled
 from getAllFiles import getAllImports
 
 def setup(path):
@@ -7,6 +7,8 @@ def setup(path):
     except ImportError:
         print("Pip not present.")
         installPip()
-    print(getAllImports(path=r"C:\Users\ASUS\Desktop\Python\My project\framework\src"))
+    imported_files= getAllImports(path=path)
+    print(IfInstalled(imported_files))
 
-setup("")
+
+setup(r"C:\Users\ASUS\Desktop\Python\My project\framework\src")

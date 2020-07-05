@@ -9,6 +9,10 @@ def getAllImports(*args, **kwargs):
         return list(import_set)
     except Exception as ex:
         return ex
+def removeFromImportList():
+    removalList=list()
+    removalList.append('')
+    return removalList
 
 def getAllFIlesName(path):
     try:
@@ -55,9 +59,9 @@ def getAllFiles(file_and_path_list,path):
             addToList(file_and_path_list,item,new_path)  
 def checkImportLine(line):
     try:
-        if "from" in line:
+        if "from " in line:
             return True
-        elif "import" in line:
+        elif "import " in line:
             return True
         else:
             return False
@@ -65,16 +69,20 @@ def checkImportLine(line):
         print(ex)
         return False
 
-def addToImportSet(import_set,import_line):
+def addToImportSet(import_set,import_line):### modification needed
     try:
         import_line_split = import_line.strip().split(" ")
         if "from" == import_line_split[0]:
             word_list=import_line_split[1]
-            import_set.add(word_list.split(".")[0])
+            import_set.add(word_list.split(".")[0].strip())
         if "import" == import_line_split[0]:
-            word_list_split=import_line_split[1].split(",")
-            for word_list in word_list_split:
-                import_set.add(word_list.split(".")[0])
+            if("," in import_line):
+                word_list_split=import_line.strip().strip("import").strip().split(",")
+                for word_list in word_list_split:
+                    import_set.add(word_list.split(".")[0].strip())
+            else:
+                word_list=import_line_split[1]
+                import_set.add(word_list.split(".")[0].strip())
     except Exception as ex:
         return ex
 

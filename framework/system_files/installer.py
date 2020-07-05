@@ -1,9 +1,11 @@
-import os,pip
-import subprocess
-import sys
-from getAllFiles import getAllFIlesName
+import subprocess,sys,pip,os
+from system_files.getAllFiles import getAllFIlesName
+from system_files.utility import blockPrint,enablePrint
 
 def install(package):
+    if(package in [None," ",''," ",' ']):
+        pass
+    print(package +" is installing")
     if hasattr(pip, 'main'):
         pip.main(['install', package])
     else:
@@ -12,7 +14,7 @@ def install(package):
 def installPip():
     print("downloading pip")
     # os.popen("curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py")
-    # os.popen("get-pip.py")
+    # os.popen("pip/get-pip.py")
 
 def checkBothPackageList():
     help("modules")
@@ -32,7 +34,13 @@ def getLocalFiles(path):
     return local_files
 
 def IfInstalled(imported_files):
+    blockPrint()
     installed_packages = checkBothPackageList()
+    enablePrint()
     unInstalled_packages = list(filter(lambda imported_file: (imported_file not in installed_packages) , imported_files))
     return unInstalled_packages
+
+def getDefaultPackages():
+    packages_=list()
+    
         

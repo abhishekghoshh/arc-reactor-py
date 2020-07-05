@@ -15,7 +15,7 @@ class ConfigReader:
         else:
             ConfigReader.__instance = self
         
-    def getAllConfig(self):
+    def getAllConfig(self,):
         config_dir=r"../configs"
         config_files= os.listdir(config_dir)
         print(config_files)
@@ -24,3 +24,6 @@ class ConfigReader:
             file_path=os.path.join(config_dir,files)
             config.read(file_path)
         return config
+
+    def getConfigType(self,data_type):
+        return None

@@ -1,10 +1,13 @@
-from system_files.utility import blockPrint,enablePrint,stringEqualsIgnoreCase
+from system_files.utility import stringEqualsIgnoreCase
 import subprocess,sys
 from system_files.getAllFiles import getAllFIlesName
 import subprocess
 import json
 import urllib.request
+from system_files.annotations import logger,printNothing
 
+
+@printNothing
 def checkBothPackageList():
     help("modules")
     all_packages=list()
@@ -23,9 +26,7 @@ def getLocalPackages(path):
     return local_files
 
 def IfInstalled(imported_files):
-    blockPrint()
     installed_packages = checkBothPackageList()
-    enablePrint()
     unInstalled_packages = list(filter(lambda imported_file: (imported_file not in installed_packages) , imported_files))
     return unInstalled_packages
 

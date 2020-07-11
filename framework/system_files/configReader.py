@@ -1,4 +1,6 @@
 import configparser,os
+from system_files.annotations import singleton
+
 class ConfigReader:
     __instance = None
     @staticmethod 
@@ -25,5 +27,3 @@ class ConfigReader:
             config.read(file_path)
         return config
 
-    def getConfigType(self,data_type):
-        return None

@@ -2,9 +2,10 @@ from system_files.installer import installPip,install
 from system_files.packageInfo import IfInstalled,getLocalPackages,checkForLatestPackage
 from system_files.getAllFiles import getAllImports
 import threading,os,sys
+from system_files.annotations import logger,printNothing
 
 
-
+@printNothing
 def dependencySetup(path):
     try:
         import pip

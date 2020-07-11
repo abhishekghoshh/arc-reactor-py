@@ -1,9 +1,24 @@
 from system_files.setup import StartPythonApplication
-from src.main.HelloWorld import hello
+from src.main.main import main
+
+
+
 
 @StartPythonApplication
 def startApplication():
-    hello()
+    main()
+
+
+
+
+
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     startApplication()

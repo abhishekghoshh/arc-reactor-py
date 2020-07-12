@@ -4,7 +4,7 @@ from src.main.main import main
 
 
 
-@StartPythonApplication
+# @StartPythonApplication
 def startApplication():
     main()
 

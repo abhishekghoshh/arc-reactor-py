@@ -2,22 +2,22 @@ import configparser,os
 from system_files.annotations import singleton
 
 class ConfigReader:
-    __instance = None
-    @staticmethod 
-    def getInstance():
-        """ Static access method. """
-        if ConfigReader.__instance == None:
-            ConfigReader()
-        return ConfigReader.__instance
+    # __instance = None
+    # @staticmethod 
+    # def getInstance():
+    #     """ Static access method. """
+    #     if ConfigReader.__instance == None:
+    #         ConfigReader()
+    #     return ConfigReader.__instance
 
-    def __init__(self):
-        """ Virtually private constructor. """
-        if ConfigReader.__instance != None:
-            raise Exception("This class is a singleton!")
-        else:
-            ConfigReader.__instance = self
+    # def __init__(self):
+    #     """ Virtually private constructor. """
+    #     if ConfigReader.__instance != None:
+    #         raise Exception("This class is a singleton!")
+    #     else:
+    #         ConfigReader.__instance = self
         
-    def getAllConfig(self,):
+    def getAllConfig(self):
         config_dir=r"../configs"
         config_files= os.listdir(config_dir)
         print(config_files)

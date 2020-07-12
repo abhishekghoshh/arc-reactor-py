@@ -57,6 +57,7 @@ def getAllFiles(file_and_path_list,path):
             getAllFiles(file_and_path_list,new_path)
         else:
             addToList(file_and_path_list,item,new_path)  
+            
 def checkImportLine(line):
     try:
         if "from " in line:

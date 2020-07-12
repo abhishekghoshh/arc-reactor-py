@@ -1,6 +1,8 @@
 from system_files.utility import stringEqualsIgnoreCase,blockPrint,enablePrint
 from functools import wraps
 from inspect import getcallargs
+import inspect
+import types
 
 object_container = dict()
 def printNothing(func_):
@@ -37,9 +39,11 @@ def ensure_annotations(f):
     @wraps(f)
     def wrapper(*args, **kwargs):
         for arg, val in getcallargs(f, *args, **kwargs).items():
+            print(arg,val)
             if arg in f.__annotations__:
                 templ = f.__annotations__[arg]
-                msg = "Argument {arg} to {f} does not match annotation type {t}"
+                print(templ)
+                # msg = "Argument {arg} to {f} does not match annotation type {t}"
                 # Check(val).is_a(templ).or_raise(EnsureError, msg.format(arg=arg, f=f, t=templ))
         return_val = f(*args, **kwargs)
         if 'return' in f.__annotations__:
@@ -65,10 +69,11 @@ def handleException(f_):
         return f_
 
 
-def singleton(class_name):
+def component(class_name):
     if(isClass(class_name)):
         @wraps(class_name)
         def wrapper(*args, **kwargs):
+            initializeConstructor(*args, **kwargs)
             if(class_name.__name__ in object_container):
                 print(class_name.__name__,"is already initialized")
                 print("Object container is",object_container)
@@ -79,15 +84,17 @@ def singleton(class_name):
                 return_val = class_name(*args, **kwargs)
                 object_container[class_name.__name__] = return_val
                 return return_val
+
+        def initializeConstructor(*args, **kwargs):
+            print("*args",*args,"**kwargs", **kwargs)
+            for parameter in list(class_name.__init__.__code__.co_varnames):
+                print(parameter)
+            print(str(inspect.signature(class_name.__init__)))
         return wrapper
     else:
         print("remove @singleton from",str(class_name).split(" ")[1])
         print("Your program is terminated forcefully")
         raise Exception('Error : Only class object can be singleton')
-
-def prototype(class_name):
-    print("Inside prototype",class_name,class_name.__name__)
-    return class_name
 
 def isClass(class_name):
     if("class" in str(class_name).split(" ")[0]):
@@ -95,9 +102,9 @@ def isClass(class_name):
     else:
         return False
 
+def isMethod(method_name):
+    return isinstance(method_name, types.MethodType)
+
 def isFunction(fun_name):
-    if("function" in str(fun_name).split(" ")[0]):
-        return True
-    else:
-        return False
+    return isinstance(fun_name, types.FunctionType)
     

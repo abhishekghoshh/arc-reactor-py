@@ -1,10 +1,8 @@
-from system_files.annotations import component
+from system_files.annotation.component import Component
 from src.main.class2 import Class2
 from numpy import array
 
-@component
+@Component()
 class Class1:
-    def __init__(self,obj=Class2(),x_=list()):
-        self.x_=x_
-        self.class2_=obj
+    def __init__(self,_class2:Class2):
         print ("inside constructor of class 1")

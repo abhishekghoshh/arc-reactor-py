@@ -1,12 +1,7 @@
-from system_files.annotations import component
+from system_files.annotation.component import Component
+from src.main.Class3 import Class3
 
-
-@component
+@Component(value=Component.TYPE.SINGLETON)
 class Class2:
-    def __init__(self):
-        print ("inside constructor of class 2")
-
-# @component
-# class Class3:
-#     def __init__(self):
-#         print ("inside constructor of class 3")
+  def __init__(self,_class3:Class3):
+    print("I am in constructor class 2")

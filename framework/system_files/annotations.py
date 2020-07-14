@@ -10,8 +10,6 @@ def printNothing(func_):
     if(stringEqualsIgnoreCase("Y",printNothingEnabled)):
         @wraps(func_)
         def wrapper(*args, **kwargs):
-            # for arg, val in getcallargs(f, *args, **kwargs).items():
-            #     print(arg, val)
             blockPrint()
             return_val = func_(*args, **kwargs)
             enablePrint()
@@ -69,38 +67,6 @@ def handleException(f_):
         return f_
 
 
-def component(class_name):
-    if(isClass(class_name)):
-        @wraps(class_name)
-        def wrapper(*args, **kwargs):
-            initializeConstructor(*args, **kwargs)
-            if(class_name.__name__ in object_container):
-                print(class_name.__name__,"is already initialized")
-                print("Object container is",object_container)
-                return object_container[class_name.__name__]
-            else:
-                print(class_name.__name__,"is not initialized")
-                print("Object container is",object_container)
-                return_val = class_name(*args, **kwargs)
-                object_container[class_name.__name__] = return_val
-                return return_val
-
-        def initializeConstructor(*args, **kwargs):
-            print("*args",*args,"**kwargs", **kwargs)
-            for parameter in list(class_name.__init__.__code__.co_varnames):
-                print(parameter)
-            print(str(inspect.signature(class_name.__init__)))
-        return wrapper
-    else:
-        print("remove @singleton from",str(class_name).split(" ")[1])
-        print("Your program is terminated forcefully")
-        raise Exception('Error : Only class object can be singleton')
-
-def isClass(class_name):
-    if("class" in str(class_name).split(" ")[0]):
-        return True
-    else:
-        return False
 
 def isMethod(method_name):
     return isinstance(method_name, types.MethodType)

@@ -1,29 +1,17 @@
 import configparser,os
 from system_files.annotations import singleton
+from system_files.annotation.component import Component
 
+@Component()
 class ConfigReader:
-    # __instance = None
-    # @staticmethod 
-    # def getInstance():
-    #     """ Static access method. """
-    #     if ConfigReader.__instance == None:
-    #         ConfigReader()
-    #     return ConfigReader.__instance
-
-    # def __init__(self):
-    #     """ Virtually private constructor. """
-    #     if ConfigReader.__instance != None:
-    #         raise Exception("This class is a singleton!")
-    #     else:
-    #         ConfigReader.__instance = self
+    def setConfigForPath(self,config_path):
+        self.__config_dict[config_path] = __getAllConfig(config_path)
         
-    def getAllConfig(self):
-        config_dir=r"../configs"
-        config_files= os.listdir(config_dir)
-        print(config_files)
+    def __getAllConfig(self,config_path):
+        config_files= os.listdir(config_path)
         config = configparser.RawConfigParser()
         for files in config_files:
-            file_path=os.path.join(config_dir,files)
+            file_path=os.path.join(config_path,files)
             config.read(file_path)
         return config
 

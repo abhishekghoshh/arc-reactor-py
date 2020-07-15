@@ -1,18 +1,20 @@
-from system_files.utility.stringUtils import stringUtils
+from system_files.utility.stringUtils import StringUtils
+from system_files.utility.commonUtils import CommonUtils
+from functools import wraps
 
 
 class DisablePrint:
     def __init__(self,*args, **kwargs):
-        print(None)
+        pass
 
     def __call__(self,func_):
         printNothingEnabled = "Y"
-        if(stringEqualsIgnoreCase("Y",printNothingEnabled)):
+        if(StringUtils.stringEqualsIgnoreCase("Y",printNothingEnabled)):
             @wraps(func_)
             def wrapper(*args, **kwargs):
-                self.blockPrint()
+                CommonUtils.blockPrint()
                 return_val = func_(*args, **kwargs)
-                self.enablePrint()
+                CommonUtils.enablePrint()
                 return return_val
             return wrapper
         else:

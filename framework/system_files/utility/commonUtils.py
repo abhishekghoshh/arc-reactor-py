@@ -1,36 +1,40 @@
-from system_files.annotation.component import Component
 from system_files.utility.stringUtils import StringUtils
 import sys,os
 import warnings
 
-@Component()
-class CommonUtils:
-    def __init__(self,_stringUtils:StringUtils):
-        self.stringUtils = _stringUtils
 
-    def stopExecution(self):
+class CommonUtils:
+    def __init__(self):
+        print(None)
+
+    @staticmethod
+    def stopExecution():
         exit(1)
 
-    def askUserToStopExecution(self):
+    @staticmethod
+    def askUserToStopExecution():
         user_input=str(input("stop excecution [Y/N] : "))
         if StringUtils.stringEqualsIgnoreCase("Y",user_input):
-            self.stopExecution()
+            CommonUtils.stopExecution()
         else:
             pass
-    
-    def stopWarningWithConfigValue(self):
+
+    @staticmethod
+    def stopWarningWithConfigValue():
         warningEnabled = "Y"
         if(StringUtils.stringEqualsIgnoreCase("N",warningEnabled)):
             stopWarning()
 
-    def stopWarning(self):
+    @staticmethod
+    def stopWarning():
         warnings.filterwarnings("ignore")
 
-    # Disable
-    def blockPrint(self):
+    @staticmethod
+    def blockPrint():
         sys.stdout = open(os.devnull, 'w')
-    # Restore
-    def enablePrint(self):
+
+    @staticmethod
+    def enablePrint():
         sys.stdout = sys.__stdout__
 
 

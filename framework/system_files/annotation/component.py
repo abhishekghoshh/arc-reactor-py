@@ -34,10 +34,10 @@ class Component:
     def __buildSingletonComponent(self,class_name):
         @wraps(class_name)
         def wrapper(*args, **kwargs):
-            kwargs = initializeConstructor(*args, **kwargs)
             if(class_name.__name__ in Component.__container):
                 return Component.__container[class_name.__name__]
             else:
+                kwargs = initializeConstructor(*args, **kwargs)
                 autowired_object = class_name(*args, **kwargs)
                 Component.__container[class_name.__name__] = autowired_object 
                 return autowired_object 
@@ -45,9 +45,12 @@ class Component:
             new_kwargs = kwargs.copy()
             for parameter in list(class_name.__init__.__code__.co_varnames):
                 autowired_class = inspect.signature(class_name.__init__).parameters[parameter].annotation
-                if(parameter=="self" or str(autowired_class)== "<class 'inspect._empty'>"):
+                if(parameter=="self"):
                     continue
-                new_kwargs[parameter] = autowired_class()
+                elif(str(autowired_class) == "<class 'inspect._empty'>"):
+                    new_kwargs[parameter] = None
+                else:
+                    new_kwargs[parameter] = autowired_class()
             return new_kwargs        
         return wrapper
 
@@ -57,7 +60,7 @@ class Component:
     def __buildRequestComponent(self,class_name):
         return class_name
     
-    def class_for_name(self,module_path,class_name):
+    def class_obj(self,module_path,class_name):
         m = importlib.import_module(module_path)
         c = getattr(m, class_name)
         obj = c()

@@ -1,6 +1,6 @@
 from system_files.utility.stringUtils import StringUtils
 
-class PrettyError:
+class ExceptionHandler:
     def __init__(self,*args, **kwargs):
         print(None)
 
@@ -14,7 +14,7 @@ class PrettyError:
                     return return_val
                 except Exception as ex:
                     print(ex)
-                    exit(0)
+                    return ex
             return wrapper
         else:
             return func_

@@ -1,8 +1,10 @@
-from system_files.utility import stringEqualsIgnoreCase
+from system_files.utility.stringUtils import stringUtils
+
+
 class DisablePrint:
     def __init__(self,*args, **kwargs):
         print(None)
-        
+
     def __call__(self,func_):
         printNothingEnabled = "Y"
         if(stringEqualsIgnoreCase("Y",printNothingEnabled)):

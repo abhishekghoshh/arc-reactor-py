@@ -1,11 +1,12 @@
-from system_files.utility import stringEqualsIgnoreCase
+from system_files.utility.stringUtils import StringUtils
+
 class PrettyError:
     def __init__(self,*args, **kwargs):
         print(None)
 
     def __call__(self,func_):
         handleExceptionEnabled = "Y"
-        if(stringEqualsIgnoreCase("Y",handleExceptionEnabled)):
+        if(StringUtils.stringEqualsIgnoreCase("Y",handleExceptionEnabled)):
             @wraps(func_)
             def wrapper(*args, **kwargs):
                 try:

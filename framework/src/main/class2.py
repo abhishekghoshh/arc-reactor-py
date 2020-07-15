@@ -5,3 +5,4 @@ from src.main.Class3 import Class3
 class Class2:
   def __init__(self,_class3:Class3):
     print("I am in constructor class 2")
+    

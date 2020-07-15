@@ -6,7 +6,7 @@ from system_files.annotation.component import Component
 class ConfigReader:
     def setConfigForPath(self,config_path):
         self.__config_dict[config_path] = __getAllConfig(config_path)
-        
+
     def __getAllConfig(self,config_path):
         config_files= os.listdir(config_path)
         config = configparser.RawConfigParser()
@@ -14,4 +14,3 @@ class ConfigReader:
             file_path=os.path.join(config_path,files)
             config.read(file_path)
         return config
-

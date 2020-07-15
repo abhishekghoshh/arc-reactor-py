@@ -1,2 +1,6 @@
 *.json
-.pdf
+*.pdf
+*.exe
+*.pyc
+__pycache__
+.vscode

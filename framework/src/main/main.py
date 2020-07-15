@@ -2,7 +2,7 @@ from src.main.class1 import Class1
 from src.main.class2 import Class2
 from src.main.Class3 import Class3
 from src.main.function1 import function1
-from system_files.configReader import ConfigReader
+from system_files.utility.configReader import ConfigReader
 import ast
 import os
 
@@ -21,6 +21,6 @@ def main():
     
     # function1(1,2)    
     path = os.path.join(os.getcwd(),r"system_files\system_config")
-    cr = ConfigReader().setConfigForPath(path)
-    
-    print(type(ast.literal_eval((cr.getAllConfig()[path]).get("default","minimum.version.major"))))
+    path2 = os.path.join(os.getcwd(),r"src\configs")
+    cr = ConfigReader().setConfigForPath(path).setConfigForPath(path2)
+    print(cr.value("minimum.version.major"))

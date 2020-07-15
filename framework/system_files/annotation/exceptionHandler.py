@@ -5,7 +5,8 @@ class ExceptionHandler:
         print(None)
 
     def __call__(self,func_):
-        handleExceptionEnabled = "Y"
+        handleExceptionEnabled = "False"
+        handleExceptionExitEnabled="False"
         if(StringUtils.stringEqualsIgnoreCase("Y",handleExceptionEnabled)):
             @wraps(func_)
             def wrapper(*args, **kwargs):

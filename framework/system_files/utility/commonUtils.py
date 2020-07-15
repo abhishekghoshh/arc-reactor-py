@@ -1,6 +1,7 @@
 from system_files.utility.stringUtils import StringUtils
 import sys,os
 import warnings
+import ast
 
 
 class CommonUtils:
@@ -36,5 +37,9 @@ class CommonUtils:
     @staticmethod
     def enablePrint():
         sys.stdout = sys.__stdout__
+    
+    @staticmethod
+    def getRealValue(val_):
+        return ast.literal_eval(val_)
 
 

@@ -1,4 +1,4 @@
-from system_files.annotation.component import Component
+from system_files.decorator.component import Component
 from src.main.class2 import Class2
 from numpy import array
 

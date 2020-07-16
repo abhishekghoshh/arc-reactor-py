@@ -1,14 +1,21 @@
-import subprocess,sys,pip,os
+import pip,os
 from system_files.utility.commonUtils import CommonUtils
 from system_files.utility.stringUtils import StringUtils
-from system_files.annotation.component import Component
+from system_files.decorator.component import Component
 
-@Component()
-class Installer:
-    def __int__(self,_util:CommonUtils,_stringUtil:StringUtils):
-        self.util=_util
-        self.stringUtil=_stringUtil
 
+@Component()        
+class InstallerService:
+    def __init__(self):
+        print("I am inside InstallerService __init__")
+    
+    def installPip(self):
+        print("downloading pip feature is incomplete right now ")
+        print("you can download it manually ")
+        # os.popen("curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py")
+        # os.popen("pip/get-pip.py")
+        CommonUtils.askUserToStopExecution()
+    
     def install(self,package):
         if(StringUtils.isStrNotBlank(package)):
             try:
@@ -22,14 +29,6 @@ class Installer:
                 print(ex)
                 print("Stopping python program")
                 print(package+" package is not downloaded")
-                self.util.stopExecution()  
+                CommonUtils.stopExecution()  
         else:
-            self.util.askUserToStopExecution()
-
-    def installPip(self):
-        print("downloading pip feature is incomplete right now ")
-        print("you can download it manually ")
-        # os.popen("curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py")
-        # os.popen("pip/get-pip.py")
-        self.util.askUserToStopExecution()
-        
+            CommonUtils.askUserToStopExecution()

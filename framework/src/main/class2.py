@@ -1,4 +1,4 @@
-from system_files.annotation.component import Component
+from system_files.decorator.component import Component
 from src.main.Class3 import Class3
 
 @Component(value=Component.TYPE.SINGLETON)

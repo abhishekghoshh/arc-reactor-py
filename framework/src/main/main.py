@@ -5,8 +5,9 @@ from src.main.function1 import function1
 from system_files.utility.configReader import ConfigReader
 import ast
 import os
+from system_files.service.installer import InstallerService
 
-from system_files.annotation.disablePrint import DisablePrint
+from system_files.decorator.disablePrint import DisablePrint
 
 # @DisablePrint()
 def main():
@@ -20,7 +21,10 @@ def main():
     # print("both class2 object are same : ",class2_obj1==class2_obj2)
     
     # function1(1,2)    
-    path = os.path.join(os.getcwd(),r"system_files\system_config")
-    path2 = os.path.join(os.getcwd(),r"src\configs")
-    cr = ConfigReader().setConfigForPath(path).setConfigForPath(path2)
-    print(cr.value("minimum.version.major"))
+    i1=InstallerService()
+    i2=InstallerService()
+    print(i1==i2)
+
+    # cr = ConfigReader().setConfigForPath(os.path.join(os.getcwd(),r"system_files\system_config")).setConfigForPath(os.path.join(os.getcwd(),r"src\configs"))
+
+    # print(cr.value("minimum.version.major"))

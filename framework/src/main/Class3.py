@@ -1,5 +1,5 @@
-from system_files.annotation.component import Component
-from system_files.annotation.disablePrint import DisablePrint
+from system_files.decorator.component import Component
+from system_files.decorator.disablePrint import DisablePrint
 
 
 @Component(value=Component.TYPE.SINGLETON)

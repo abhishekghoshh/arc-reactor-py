@@ -1,5 +1,5 @@
 import configparser,os
-from system_files.annotation.component import Component
+from system_files.decorator.component import Component
 from collections import namedtuple
 
 @Component()

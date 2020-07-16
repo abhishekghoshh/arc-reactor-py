@@ -1,10 +1,10 @@
-# from system_files.setup import StartPythonApplication
+from system_files.decorator.startPythonApplication import StartPythonApplication
 from src.main.main import main
 
 
 
 
-# @StartPythonApplication
+@StartPythonApplication()
 def startApplication():
     main()
 

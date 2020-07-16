@@ -2,12 +2,25 @@ from system_files.utility.stringUtils import StringUtils
 import sys,os
 import warnings
 import ast
+import types
 
 
 class CommonUtils:
     def __init__(self):
         print(None)
 
+    @staticmethod
+    def getRealValue(val_):
+        return ast.literal_eval(val_)
+
+    @staticmethod
+    def isMethod(method_name):
+        return isinstance(method_name, types.MethodType)
+
+    @staticmethod
+    def isFunction(fun_name):
+        return isinstance(fun_name, types.FunctionType)
+    
     @staticmethod
     def stopExecution():
         exit(1)
@@ -23,8 +36,8 @@ class CommonUtils:
     @staticmethod
     def stopWarningWithConfigValue():
         warningEnabled = "Y"
-        if(StringUtils.stringEqualsIgnoreCase("N",warningEnabled)):
-            stopWarning()
+        if(StringUtils.stringEqualsIgnoreCase("Y",warningEnabled)):
+            CommonUtils.stopWarning()
 
     @staticmethod
     def stopWarning():
@@ -38,8 +51,8 @@ class CommonUtils:
     def enablePrint():
         sys.stdout = sys.__stdout__
     
-    @staticmethod
-    def getRealValue(val_):
-        return ast.literal_eval(val_)
+
+    
+    
 
 

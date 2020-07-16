@@ -42,16 +42,19 @@ class Component:
                 Component.__container[class_name.__name__] = autowired_object 
                 return autowired_object 
         def initializeConstructor(*args, **kwargs)-> dict:
-            new_kwargs = kwargs.copy()
-            for parameter in list(class_name.__init__.__code__.co_varnames):
-                autowired_class = inspect.signature(class_name.__init__).parameters[parameter].annotation
-                if(parameter=="self"):
-                    continue
-                elif(str(autowired_class) == "<class 'inspect._empty'>"):
-                    new_kwargs[parameter] = None
-                else:
-                    new_kwargs[parameter] = autowired_class()
-            return new_kwargs        
+            try:
+                new_kwargs = kwargs.copy()
+                for parameter in list(class_name.__init__.__code__.co_varnames):
+                    autowired_class = inspect.signature(class_name.__init__).parameters[parameter].annotation
+                    if(parameter=="self"):
+                        continue
+                    elif(str(autowired_class) == "<class 'inspect._empty'>"):
+                        new_kwargs[parameter] = None
+                    else:
+                        new_kwargs[parameter] = autowired_class()
+            except Exception as ex:
+                print(ex)
+            return new_kwargs
         return wrapper
 
     def __buildPrototypeComponent(self,class_name):

@@ -3,8 +3,9 @@ import inspect
 from functools import wraps
 from collections import namedtuple
 
+
 class Component:
-    __container = dict()
+    __singleton_container = dict()
     TYPE = namedtuple('_component', ['SINGLETON','PROTOTYPE','REQUEST'])("singleton","prototype","request")
     def __init__(self,*args, **kwargs):
         self.__value=kwargs.get('value',Component.TYPE.SINGLETON)
@@ -34,12 +35,12 @@ class Component:
     def __buildSingletonComponent(self,class_name):
         @wraps(class_name)
         def wrapper(*args, **kwargs):
-            if(class_name.__name__ in Component.__container):
-                return Component.__container[class_name.__name__]
+            if(class_name.__name__ in Component.__singleton_container):
+                return Component.__singleton_container[class_name.__name__]
             else:
                 kwargs = initializeConstructor(*args, **kwargs)
                 autowired_object = class_name(*args, **kwargs)
-                Component.__container[class_name.__name__] = autowired_object 
+                Component.__singleton_container[class_name.__name__] = autowired_object 
                 return autowired_object 
         def initializeConstructor(*args, **kwargs)-> dict:
             try:
@@ -54,11 +55,15 @@ class Component:
                         new_kwargs[parameter] = autowired_class()
             except Exception as ex:
                 print(ex)
+            
             return new_kwargs
         return wrapper
 
     def __buildPrototypeComponent(self,class_name):
-        return class_name
+        @wraps(class_name)
+        def wrapper(*args, **kwargs):
+            return class_name(*args, **kwargs) 
+        return wrapper
 
     def __buildRequestComponent(self,class_name):
         return class_name

@@ -3,9 +3,12 @@ from system_files.service.installer import InstallerService
 from system_files.service.getAllFiles import FileService
 from system_files.service.packageInfo import PackageInfoService
 from system_files.decorator.component import Component
+from system_files.decorator.restrict import Restrict
 
+@Restrict(frameworkOnly=True,access=["system_files"])
 @Component()
 class SysService:
+    
     def __init__(self,_fileService:FileService,_installerService:InstallerService,_packageInfoService:PackageInfoService):
         print("I am inide SysService init")
         self.fileService=_fileService

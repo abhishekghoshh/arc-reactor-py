@@ -3,7 +3,6 @@ from system_files.utility.commonUtils import CommonUtils
 from system_files.utility.stringUtils import StringUtils
 from system_files.decorator.component import Component
 
-
 @Component()        
 class InstallerService:
     def __init__(self):

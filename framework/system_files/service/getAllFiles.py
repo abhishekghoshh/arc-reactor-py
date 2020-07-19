@@ -1,6 +1,8 @@
 import os
 from system_files.decorator.component import Component
+from system_files.decorator.restrict import Restrict
 
+@Restrict(frameworkOnly=True,access=["system_files","src"])
 @Component()
 class FileService:
     def __init__(self):

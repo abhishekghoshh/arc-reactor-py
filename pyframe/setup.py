@@ -11,7 +11,7 @@ setuptools.setup(
     description="A custom framework for python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="",
+    url="https://github.com/Abhishek1009/python-projects/tree/master/pyframe",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",

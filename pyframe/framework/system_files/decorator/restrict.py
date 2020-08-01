@@ -6,6 +6,7 @@ from collections import namedtuple
 
 class Restrict:
     __FRAMEWORK_ENTRY_POINT=namedtuple('_component', ['PATH'])(r"system_files\decorator\startPythonApplication.py")
+    __satck_removal_list=['<frozen importlib._bootstrap>','<frozen importlib._bootstrap_external>']
     def __init__(self,*args, **kwargs):
         self.__callViaFrameWorkOnlyFlag = kwargs.get("frameworkOnly",False)
         self.__validPath = kwargs.get("access",["system_files"])
@@ -13,10 +14,10 @@ class Restrict:
     def __call__(self,func_):
         @wraps(func_)
         def wrapper(*args, **kwargs):
-            # print(str(func_),"----------------------------")
+            print(str(func_),"----------------------------")
             __frame_stack=inspect.stack()
             self.__addToStack(__frame_stack)
-            # [print(filename)for filename in self.__stack]
+            [print(filename)for filename in self.__stack]
             # print(func_,"----------------------------")
             self.__callViaFrameWorkOnly(func_)
             if(self.__callViaAccesiblePathOnly(func_)):
@@ -56,7 +57,7 @@ class Restrict:
         __current_frame_filename=stackTraceList[0].filename
         __stack.append(__current_frame_filename)
         for frame in stackTraceList:
-            if(frame.filename != __current_frame_filename):
+            if(frame.filename != __current_frame_filename and frame.filename not in Restrict.__satck_removal_list):
                 __current_frame_filename=frame.filename
                 __stack.append(__current_frame_filename)
         self.__stack =  __stack

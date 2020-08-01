@@ -2,8 +2,9 @@ import importlib
 import inspect
 from functools import wraps
 from collections import namedtuple
+from system_files.decorator.restrict import Restrict
 
-
+@Restrict(frameworkOnly=True,access=["system_files","src"])
 class Component:
     __singleton_container = dict()
     TYPE = namedtuple('_component', ['SINGLETON','PROTOTYPE','REQUEST'])("singleton","prototype","request")

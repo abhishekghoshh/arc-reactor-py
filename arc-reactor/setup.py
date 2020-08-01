@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name='pyframe',  
+    name='arc-reactor',  
     version='1.0.0',
     author="Abhishek Ghosh",
     author_email="ghoshabhishek1640@gmail.com",

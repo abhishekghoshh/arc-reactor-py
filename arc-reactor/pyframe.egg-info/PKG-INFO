@@ -1,0 +1,14 @@
+Metadata-Version: 2.1
+Name: pyframe
+Version: 1.0.0
+Summary: A custom framework for python
+Home-page: https://github.com/Abhishek1009/python-projects/tree/master/pyframe
+Author: Abhishek Ghosh
+Author-email: ghoshabhishek1640@gmail.com
+License: UNKNOWN
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown

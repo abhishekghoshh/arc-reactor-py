@@ -1,6 +1,0 @@
-README.md
-setup.py
-pyframe.egg-info/PKG-INFO
-pyframe.egg-info/SOURCES.txt
-pyframe.egg-info/dependency_links.txt
-pyframe.egg-info/top_level.txt

@@ -1,8 +1,8 @@
 Metadata-Version: 2.1
-Name: pyframe
-Version: 1.0.0
+Name: arc-reactor
+Version: 1.0.8
 Summary: A custom framework for python
-Home-page: https://github.com/Abhishek1009/python-projects/tree/master/pyframe
+Home-page: https://github.com/Abhishek1009/python-projects/tree/master/arc-reactor
 Author: Abhishek Ghosh
 Author-email: ghoshabhishek1640@gmail.com
 License: UNKNOWN

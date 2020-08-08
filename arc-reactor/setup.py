@@ -8,7 +8,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='arc-reactor',  
-    version='1.0.8',
+    version='1.0.9',
     author="Abhishek Ghosh",
     author_email="ghoshabhishek1640@gmail.com",
     description="A custom framework for python",

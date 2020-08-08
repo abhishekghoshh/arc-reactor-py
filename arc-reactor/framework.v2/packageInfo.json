@@ -1,1 +1,7 @@
-{}
+{
+    "name":"arc-reactor-project",
+    "version": "1.0.0",
+    "description": "A sample arc-reactor project",
+    "main": "application.py"
+
+}

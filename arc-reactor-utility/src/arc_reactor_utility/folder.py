@@ -2,7 +2,7 @@ import os,shutil
 from collections import namedtuple
 
 class Folder:
-    __permitted_arguments_data_types =[dict,list,type(None)]
+    __permitted_arguments_data_types =[dict,list,tuple,set,type(None)]
     __permitted_action_types =["<class 'function'>","<class 'method'>",str(type(None))]
     __content_exception=['System Volume Information','$RECYCLE.BIN']
     TYPE = namedtuple('_folder', ['FILE','FOLDER'])('FILE','FOLDER')
@@ -20,7 +20,7 @@ class Folder:
                 self.__direct_folder_path = self.__isValidPath(self.root_folder)
                 if(self.__direct_folder_path):
                     self.__whole_path=self.root_folder
-                    return None
+                    return
                 self.__inside_workspace = self.__isValidPath(self.__joinPath(os.getcwd(),self.root_folder))   
                 self.__whole_path = self.__joinPath(os.getcwd(),self.root_folder)
             except Exception as ex:
@@ -110,17 +110,53 @@ class Folder:
         arguments['argument']=argument
         return arguments
 
-    @staticmethod
-    def help():
-        print("help")           
-
     def removePyCache(self,*args, **kwargs):
         path = kwargs.get('path',os.getcwd())
-        self.actionForPathAndFile(
-            path=path,
-            actionForFolder= self.__removePyCache
-        )
+        if(self.__isValidPath(path)):
+            self.actionForPathAndFile(
+                path=path,
+                actionForFolder= self.__removePyCache
+            )
+        else:
+            raise Exception("invalid path")
     
     def __removePyCache(self,arguments):
         if(arguments['name']=='__pycache__'):
             shutil.rmtree((arguments['path']))
+
+    @staticmethod
+    def help():
+        print("help")
+
+    def typesAvailable(self,*args, **kwargs):
+        path = kwargs.get('path',os.getcwd())
+        if(self.__isValidPath(path)):
+            typesSet = set()
+            self.actionForPathAndFile(
+                path=path,
+                actionForFile = self.__typesAvailable,
+                argumentForFile= typesSet
+            )
+            return typesSet
+        else:
+            raise Exception("invalid path")
+    
+    def __typesAvailable(self,arguments):
+        typeSet = arguments['argument']
+        fileName = arguments['name']
+        try:
+            extension = self.getFileType(fileName)
+            if(None != extension):
+                typeSet.add(extension)
+        except Exception as ex:
+            # print(ex)
+            pass
+        
+    def getFileType(self,fileName):
+        try:
+            file_name_array = str(fileName).split(".")
+            if(len(file_name_array)<2):
+                raise Exception("This is not a file name")
+            return file_name_array[-1]
+        except Exception as ex:
+            return None

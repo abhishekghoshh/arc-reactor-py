@@ -31,7 +31,12 @@ class Folder:
             self.__whole_path = os.getcwd()
 
     def __isValidPath(self,path):
-        return os.path.exists(path)
+        if(None!=path):
+            return os.path.exists(path)
+        else:
+            print("path can not be None")
+            return False
+
     
     def __joinPath(self,root_path,sub_path):
         try:
@@ -108,6 +113,7 @@ class Folder:
         arguments['isFile'] = fileOrFolder is Folder.TYPE.FILE
         arguments['isFolder'] = fileOrFolder is Folder.TYPE.FOLDER
         arguments['argument']=argument
+        arguments['exception']=None
         return arguments
 
     def removePyCache(self,*args, **kwargs):
@@ -126,7 +132,7 @@ class Folder:
 
     @staticmethod
     def help():
-        print("help")
+        print("yet to implement")
 
     def typesAvailable(self,*args, **kwargs):
         path = kwargs.get('path',os.getcwd())
@@ -160,3 +166,35 @@ class Folder:
             return file_name_array[-1]
         except Exception as ex:
             return None
+
+    def moveFilesBasedOnType(self,*args, **kwargs):
+        source = kwargs.get('source',None)
+        destination = kwargs.get('destination',None)
+        if(self.__isValidPath(source) and self.__isValidPath(destination)):
+            self.actionForPathAndFile(
+                path=source,
+                actionForFile = self.__typesAvailable,
+                argumentForFile= {
+                    'source':source,
+                    'destiation':destination
+                    }
+            )
+        else:
+            print("source and destination should be valid path")
+
+    def __moveFilesBasedOnType(self,arguments):
+        destination = arguments['argument']['destination']
+        try:
+            file_type = self.getFileType(arguments['name'])
+            if(None == file_type):
+                raise Exception("File type should not be None")
+            # yet to be implemented
+        except Exception as exception:
+            print(exception)
+            arguments['exception']=exception
+            self.__generateReport(arguments)
+
+    def __generateReport(self,arguments):
+        exception = arguments['exception']
+        # yet to be implemented
+        pass

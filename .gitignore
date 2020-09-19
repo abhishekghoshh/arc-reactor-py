@@ -1,6 +1,7 @@
-*.json
 *.pdf
 *.exe
 *.pyc
 __pycache__
 .vscode
+build/*
+dist/*

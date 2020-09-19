@@ -1,0 +1,30 @@
+{
+    "name":"arc-reactor-project",
+    "version": "1.0.0",
+    "description": "A sample arc-reactor project",
+    "main": "application.py",
+    "author": "Abhishek Ghosh",
+    "license": "ISC",
+    "scripts": {
+        "init": "arc-reactor init",
+        "start": "arc-reactor start",
+        "update": "arc-reactor update",
+        "test": "arc-reactor test",
+        "clean": "arc-reactor clean",
+        "help": "arc-reactor help"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Abhishek1009/github-report-with-typescript.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Abhishek1009/github-report-with-typescript/issues"
+    },
+    "homepage": "https://github.com/Abhishek1009/github-report-with-typescript#readme",
+    "dependencies": {
+        "pyzip": "latest",
+        "pyfolder": "latest",
+        "colorama": "latest"
+      }
+    
+}

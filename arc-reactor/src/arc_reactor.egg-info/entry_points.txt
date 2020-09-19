@@ -1,3 +1,0 @@
-[console_scripts]
-arc-reactor = arc_reactor.__main__:main
-

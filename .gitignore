@@ -3,5 +3,5 @@
 *.pyc
 __pycache__
 .vscode
-build/*
-dist/*
+**/build/*
+**/dist/*
